@@ -1,0 +1,19 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'DM Sans', sans-serif;
+  background: #faf7f2;
+  color: #1a1a18;
+  overflow-x: hidden;
+}
+
+.recipe-dialog .mat-mdc-dialog-container {
+  border-radius: 20px !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.recipe-dialog .mdc-dialog__surface {
+  border-radius: 20px !important;
+  background: #faf7f2 !important;
+}

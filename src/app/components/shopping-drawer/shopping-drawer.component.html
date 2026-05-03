@@ -1,0 +1,45 @@
+<div class="backdrop" [class.open]="isOpen" (click)="close.emit()"></div>
+
+<div class="drawer" [class.open]="isOpen">
+
+  <div class="drawer-header">
+    <span class="drawer-title">Shopping List</span>
+    <span class="count-badge">{{ shopping.totalCount() }}</span>
+    <button class="close-btn" (click)="close.emit()">✕</button>
+  </div>
+
+  <div class="drawer-body">
+    <ng-container *ngIf="shopping.totalCount() > 0; else emptyTpl">
+
+      <div class="unit-row">
+        <span class="unit-label">Units:</span>
+        <button [class.active]="unit === 'metric'"   (click)="unit = 'metric'">Metric</button>
+        <button [class.active]="unit === 'imperial'" (click)="unit = 'imperial'">Imperial</button>
+      </div>
+
+      <ng-container *ngFor="let entry of groupedEntries()">
+        <div class="group-title">{{ entry.title }}</div>
+        <div class="list-item" *ngFor="let item of entry.items">
+          <span class="item-name">{{ item.ingredient.name }}</span>
+          <span class="item-amount">{{ item.ingredient.amountGrams | gramsToOunces:unit }}</span>
+          <button class="remove-btn" (click)="shopping.removeItem(item.recipeId, item.ingredient.name)">✕</button>
+        </div>
+        <button class="remove-recipe-btn" (click)="shopping.removeRecipe(entry.recipeId)">
+          Remove recipe
+        </button>
+      </ng-container>
+
+    </ng-container>
+    <ng-template #emptyTpl>
+      <div class="empty">
+        <div class="empty-icon">🛒</div>
+        <p>Add ingredients from recipes to build your shopping list.</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="drawer-footer">
+    <button class="clear-btn" (click)="shopping.clearAll()">Clear all items</button>
+  </div>
+
+</div>

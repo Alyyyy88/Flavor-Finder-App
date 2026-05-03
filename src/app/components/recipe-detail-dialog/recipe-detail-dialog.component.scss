@@ -1,0 +1,193 @@
+.dialog-container {
+  background: #faf7f2;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+// ── HEADER / IMAGE ────────────────────────────────────────────────────────
+.dialog-header {
+  position: relative;
+  height: 240px;
+  background: #1a1a18;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: linear-gradient(135deg, #f0e8d8, #f5e6d3);
+}
+
+.close-btn {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  background: rgba(255, 255, 255, .85);
+  color: #1a1a18;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+// ── CONTENT ───────────────────────────────────────────────────────────────
+.dialog-content {
+  padding: 1.5rem 2rem !important;
+  max-height: 50vh;
+  background: #faf7f2;
+}
+
+.recipe-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #1a1a18;
+  margin-bottom: .5rem;
+}
+
+.meta-row {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.meta-chip {
+  padding: .3rem .75rem;
+  background: #f0e8d8;
+  color: #6b6b65;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 500;
+
+  &.diet { background: #d4e8da; color: #2d4f38; text-transform: capitalize; }
+}
+
+.description {
+  font-size: .88rem;
+  color: #6b6b65;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+// ── SECTIONS ──────────────────────────────────────────────────────────────
+.section { margin: 1.25rem 0; }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .75rem;
+}
+
+h3 {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #6b6b65;
+  font-weight: 600;
+}
+
+// ── UNIT TOGGLE ───────────────────────────────────────────────────────────
+.unit-toggle {
+  display: flex;
+  gap: .25rem;
+
+  button {
+    padding: .25rem .65rem;
+    border-radius: 999px;
+    border: 1px solid #e0d8cc;
+    background: transparent;
+    cursor: pointer;
+    font-size: .75rem;
+    color: #6b6b65;
+    transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
+
+    &.active { background: #4a7c59; border-color: #4a7c59; color: #fff; }
+  }
+}
+
+// ── INGREDIENTS ───────────────────────────────────────────────────────────
+.ingredient-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 0;
+    border-bottom: 1px solid #e0d8cc;
+    font-size: .88rem;
+  }
+}
+
+.ing-name  { color: #1a1a18; text-transform: capitalize; }
+.ing-amount { color: #6b6b65; font-weight: 500; }
+
+// ── STEPS ─────────────────────────────────────────────────────────────────
+.steps-list {
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: .75rem;
+    margin-bottom: .75rem;
+    font-size: .88rem;
+    line-height: 1.6;
+    align-items: flex-start;
+  }
+}
+
+.step-num {
+  min-width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #d4e8da;
+  color: #2d4f38;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+// ── ACTIONS ───────────────────────────────────────────────────────────────
+.dialog-actions {
+  padding: 1rem 2rem !important;
+  background: #faf7f2;
+  border-top: 1px solid #e0d8cc;
+}
+
+.add-all-btn {
+  width: 100%;
+  padding: .9rem;
+  border-radius: 999px;
+  background: #2d4f38;
+  color: #fff;
+  border: none;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+  font-family: 'DM Sans', sans-serif;
+
+  &:hover { background: #4a7c59; }
+}

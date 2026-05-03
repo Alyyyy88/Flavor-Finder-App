@@ -1,0 +1,89 @@
+<!-- HERO -->
+<section class="hero" [class.shrunk]="heroShrunk()">
+  <div class="hero-bg"></div>
+  <div class="hero-content" [class.row]="heroShrunk()">
+    <div class="wordmark">FlavorFinder</div>
+    <p class="hero-sub" *ngIf="!heroShrunk()">Discover recipes by ingredient — build your shopping list</p>
+    <div class="search-wrap">
+      <input
+        class="search-input"
+        type="text"
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onQueryChange($event)"
+        placeholder="Search by ingredient (e.g. lemon, chicken...)"
+        autocomplete="off"
+      />
+      <span class="search-icon">⌕</span>
+    </div>
+    <p class="search-hint" *ngIf="!heroShrunk()">Try "avocado", "pasta garlic", or "chocolate banana"</p>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main" *ngIf="heroShrunk()">
+
+  <!-- LOADING SKELETONS -->
+  <div class="skeleton-grid" *ngIf="loading()">
+    <div class="skeleton-card" *ngFor="let i of [1,2,3,4,5,6,7,8,9]">
+      <div class="skel skel-img"></div>
+      <div class="skel-body">
+        <div class="skel skel-line"></div>
+        <div class="skel skel-line skel-short"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-state" *ngIf="error()">
+    <div class="state-icon">⚠️</div>
+    <h2>Couldn't load recipes</h2>
+    <p>Please try again in a moment.</p>
+  </div>
+
+  <!-- RESULTS -->
+  <ng-container *ngIf="!loading() && !error() && recipes().length">
+    <div class="results-meta">
+      <div>
+        <h2 class="results-title">{{ recipes().length }} Recipes</h2>
+        <span class="query-tag">"{{ lastQuery() }}"</span>
+      </div>
+      <button class="cart-btn" (click)="drawerOpen = true">
+        🛒 Shopping List
+        <span class="cart-count">{{ shopping.totalCount() }}</span>
+      </button>
+    </div>
+
+    <div class="filters">
+      <span class="filter-label">Filter:</span>
+      <button class="chip" [class.active]="activeFilter==='all'" (click)="setFilter('all')">All</button>
+      <button class="chip" [class.active]="activeFilter==='quick'" (click)="setFilter('quick')">Under 30 min</button>
+      <button class="chip" [class.active]="activeFilter==='vegetarian'" (click)="setFilter('vegetarian')">Vegetarian</button>
+      <button class="chip" [class.active]="activeFilter==='healthy'" (click)="setFilter('healthy')">Healthy</button>
+    </div>
+
+    <div class="recipe-grid">
+      <app-recipe-card
+        *ngFor="let recipe of filteredRecipes(); let i = index"
+        [recipe]="recipe"
+        [style.animation-delay]="(i * 60) + 'ms'"
+        (openDetail)="openDialog($event)"
+      />
+    </div>
+
+    <div class="empty-filter" *ngIf="filteredRecipes().length === 0">
+      <div class="state-icon">🔍</div>
+      <h2>No matches for this filter</h2>
+      <p>Try a different filter or search term.</p>
+    </div>
+  </ng-container>
+
+  <!-- EMPTY SEARCH RESULT -->
+  <div class="error-state" *ngIf="!loading() && !error() && recipes().length === 0 && lastQuery()">
+    <div class="state-icon">🍽</div>
+    <h2>No recipes found</h2>
+    <p>Try different ingredients.</p>
+  </div>
+</main>
+
+<!-- SHOPPING DRAWER -->
+<app-shopping-drawer [isOpen]="drawerOpen" (close)="drawerOpen = false" />

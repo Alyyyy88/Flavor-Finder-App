@@ -1,0 +1,29 @@
+<div class="card" (click)="onCardClick()">
+  <div class="card-img">
+    <img
+      [src]="recipe.image"
+      [alt]="recipe.title"
+      loading="lazy"
+      (error)="onImgError($event)"
+    />
+    <div class="img-fallback" *ngIf="imgError">🍽</div>
+    <button class="heart-btn" [class.saved]="isFav" (click)="toggleFav($event)">
+      {{ isFav ? '♥' : '♡' }}
+    </button>
+    <span class="time-badge">⏱ {{ recipe.prepTime }} min</span>
+  </div>
+
+  <div class="card-body">
+    <h3 class="card-title">{{ recipe.title }}</h3>
+    <div class="card-meta">
+      <span>🍽 {{ recipe.servings }} servings</span>
+      <span *ngIf="recipe.calories > 0">🔥 {{ recipe.calories }} kcal</span>
+    </div>
+    <div class="tags">
+      <span class="tag" *ngFor="let tag of recipe.tags.slice(0, 3)">{{ tag }}</span>
+    </div>
+    <button class="add-btn" [class.added]="isInList" (click)="toggleList($event)">
+      {{ isInList ? '✓ In shopping list' : '+ Add to shopping list' }}
+    </button>
+  </div>
+</div>
